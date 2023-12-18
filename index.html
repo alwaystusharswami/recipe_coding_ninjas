@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meal App</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    
-</body>
-<script src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./meal.html">Meal Detail</a></li>
+        <li><a href="./fav.html">Fav Meal</a></li>
+      </ul>
+    </nav>
+    <form>
+      <input type="text"  id="input" autocomplete="off" placeholder="search meal by name" />
+      <button type="submit" id="search">Search</button>
+    </form>
+    <ul class="search-result"></ul>
+  </body>
 </html>
