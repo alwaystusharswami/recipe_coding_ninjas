@@ -5,21 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meal App</title>
     <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
-
+    <script src="script.js" defer></script>
   </head>
-  <body>
-    <nav>
-      <ul>
-        <li><a href="./index.html">Home</a></li>
-        <li><a href="./meal.html">Meal Detail</a></li>
-        <li><a href="./fav.html">Fav Meal</a></li>
-      </ul>
-    </nav>
-    <form>
-      <input type="text"  id="input" autocomplete="off" placeholder="search meal by name" />
-      <button type="submit" id="search">Search</button>
-    </form>
-    <ul class="search-result"></ul>
+  <body style="background-color: orange">
+    <div class="container">
+      <div class="meal-wrapper">
+        <div class="meal-search">
+          <h2 class="title">Find Meals for Your Ingredients</h2>
+          <div class="meal-search-box">
+            <input
+              type="text"
+              class="search-content"
+              placeholder="Enter an ingredient"
+              id="search-input"
+            />
+            <button type="submit" class="search-btn btn" id="search-btn">
+              ->
+            </button>
+          </div>
+          <div class="list"></div>
+        </div>
+        <div class="meal-result">
+          <h2 class="title">Your Search Results</h2>
+          <div id="meal">
+           <!-- // meal item  -->
+            
+          </div>
+        </div>
+            <!-- end meal item here  -->
+
+        <div class="meal-details">
+          <!-- recipe close btn   -->
+          <button
+            type="button"
+            class="btn recipe-close-btn"
+            id="recipe-close-btn"
+          >
+            X
+          </button>
+          <!-- meal content  -->
+          <div class="meal-details-content">
+            <h2 class="recipe-title">Meals Name Here</h2>
+            <p class="recipe-category">Category Name</p>
+            <div class="recipe-instruct">
+              <h3>Instructions:</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
+                voluptatum inventore ducimus beatae nemo assumenda neque ex
+                perferendis temporibus nesciunt porro nam, tempora odio, fugit
+                commodi cumque laborum molestias velit.
+              </p>
+            </div>
+            <div class="recipe-meal-img"><img src="" alt="" /></div>
+            <div class="recipe-link"><a href="#" target="_blank">watch video</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
