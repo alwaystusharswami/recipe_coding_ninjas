@@ -5,9 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meal App</title>
     <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/54fffd334c.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="script.js" defer></script>
   </head>
   <body style="background-color: orange">
+    <nav>
+      <ul>
+        <li id="home">Home</li>
+        <li id="fav">Fav Meal</li>
+      </ul>
+    </nav>
     <div class="container">
       <div class="meal-wrapper">
         <div class="meal-search">
@@ -20,20 +30,18 @@
               id="search-input"
             />
             <button type="submit" class="search-btn btn" id="search-btn">
-              ->
+              <i class="fa-solid fa-magnifying-glass"></i>
             </button>
           </div>
-          <div class="list">
-          </div>
+          <div class="list"></div>
         </div>
         <div class="meal-result">
           <h2 class="title">Your Search Results</h2>
           <div id="meal">
-           <!-- // meal item  -->
-            
+            <!-- // meal item  -->
           </div>
         </div>
-            <!-- end meal item here  -->
+        <!-- end meal item here  -->
 
         <div class="meal-details">
           <!-- recipe close btn   -->
@@ -45,11 +53,14 @@
             X
           </button>
           <!-- meal content  -->
-          <div class="meal-details-content">
-            
-          </div>
+          <div class="meal-details-content"></div>
         </div>
       </div>
     </div>
+    <div class="favContainer">
+      <h1>favorite Recipe</h1>
+      <div class="favList"></div>
+
+  </div>
   </body>
 </html>

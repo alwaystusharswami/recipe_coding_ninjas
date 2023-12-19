@@ -12,6 +12,21 @@ body {
   font-size: 1.05rem;
   line-height: 1.6;
 }
+nav ul{
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  margin-top: 2rem;
+}
+nav li{
+  font-size: 1.5rem;
+  margin-right: 2rem;
+}
+nav li:hover{
+  color: #b54507;
+  border-bottom: 1px solid red;
+
+}
 
 .btn {
   cursor: pointer;
@@ -106,7 +121,8 @@ body {
   justify-content: space-around;
 }
 .meal-item{
-
+  background-color: #fff;
+padding: 10px;
   width: 300px;
   border-radius: 1rem;
   -webkit-border-radius: 1rem;
@@ -120,6 +136,11 @@ body {
 .meal-img img{
   width: 100%;
   display: block;
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
 }
 .meal-name{
   padding: 1.5rem 0.5rem;
@@ -127,6 +148,17 @@ body {
 .meal-name h3{
   font-size: 1.4rem;
 }
+.meal-item i{
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 90px;
+  font-size: 2rem;
+  color: #fff;
+}
+.red{
+  color: #b54507 !important;
+}
+
 .recipe-btn{
   text-decoration: none;
   color: #fff;
@@ -152,6 +184,87 @@ body {
   background: var(--tenne-tawny-dark);
 }
 
+/* fav  */
+/* fav  */
+
+.favContainer{
+  text-align: center;
+  font-size: 2rem;
+  display: none;
+}
+.favContainerCome{
+  display: block !important;
+}
+.favContainer h1{
+  color: #fff;
+  text-transform: capitalize;
+}
+.favList{
+  margin: 2.4rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.fav-heart{
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 230px;
+  font-size: 2rem;
+  color: var(--tenne-tawny);
+}
+.fav-meal-item{
+  background-color: #fff;
+padding: 10px;
+  width: 300px;
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.79);
+  margin: 1.5rem;
+}
+.fav-meal-img img{
+  width: 100%;
+  display: block;
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+}
+.fav-meal-name{
+  padding: 1.5rem 0.5rem;
+  text-align: center;
+}
+.fav-meal-name h3{
+  font-size: 1.4rem;
+}
+.fav-recipe-btn{
+  text-decoration: none;
+  color: #fff;
+  background: var(--tenne-tawny-dark);
+  font-weight: 500;
+  font-size: 1.1rem;
+  padding: 0.75rem 0;
+  display: block;
+  width: 175px;
+  margin: 1rem auto;
+  border-radius: 2rem;
+  -webkit-border-radius: 2rem;
+  -moz-border-radius: 2rem;
+  -ms-border-radius: 2rem;
+  -o-border-radius: 2rem;
+  transition: all 0.4s linear;
+  -webkit-transition: all 0.4s linear;
+  -moz-transition: all 0.4s linear;
+  -ms-transition: all 0.4s linear;
+  -o-transition: all 0.4s linear;
+}
+.fav-recipe-btn:hover{
+  background: var(--tenne-tawny-dark);
+}
 /* meal details  */
 .meal-details{
   position: fixed;
@@ -189,6 +302,10 @@ body {
 }
 
 /* js related class  */
+
+.containerGone{
+  display: none !important;
+}
 .showRecipe{
   display: block;
 }

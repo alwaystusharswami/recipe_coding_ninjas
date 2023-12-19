@@ -307,21 +307,34 @@ const list = [
   "Yaki Udon",
 ];
 let fav = [];
+// const home=document.querySelector('#home');
+const container = document.querySelector(".container");
 const resultBox = document.querySelector(".list");
 const inputBox = document.querySelector("#search-input");
 const searchBtn = document.querySelector("#search-btn");
 const mealList = document.querySelector("#meal");
 const recipeCloseBtn = document.querySelector(".recipe-close-btn");
-const mealDetailsContent=document.querySelector('.meal-details-content')
+const mealDetailsContent = document.querySelector(".meal-details-content");
+const favContainer=document.querySelector('.favContainer')
+
+
 searchBtn.addEventListener("click", getMealList);
 mealList.addEventListener("click", getMealRecipe);
 
+document.querySelector("#home").addEventListener("click", function () {
+  container.classList.remove("containerGone");
+});
+document.querySelector('#fav').addEventListener('click',function(){
+  favContainer.classList.add('favContainerCome');
 
-recipeCloseBtn.addEventListener('click',()=>{
-  mealDetailsContent.parentElement.classList.remove('showRecipe');
 })
+
+recipeCloseBtn.addEventListener("click", () => {
+  mealDetailsContent.parentElement.classList.remove("showRecipe");
+});
 // get meal list that matches with ingredients
 async function getMealList() {
+  resultBox.innerHTML = "";
   let searchInputTxt = document.querySelector("#search-input").value.trim();
   await fetch(
     `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInputTxt}`
@@ -333,10 +346,12 @@ async function getMealList() {
         data.meals.forEach((meal) => {
           html += `
           <div class="meal-item" data-id="${meal.idMeal}">
+          <p><i class="fa-solid fa-heart heart"></i></p>
+
               <div class="meal-img"><img src="${meal.strMealThumb}" alt="img" /></div>
               <div class="meal-name">
-                <h3>${meal.strMeal} </h3>
-                <a href="#" class="recipe-btn">get recipe</a>
+                <h3>${meal.strMeal} </h3> 
+                <a href="#" class="recipe-btn">Get Recepi</a>
               </div>
             </div>`;
         });
@@ -358,12 +373,23 @@ async function getMealRecipe(e) {
     )
       .then((res) => res.json())
       .then((data) => mealRecipeModal(data.meals));
+  } else if (e.target.classList.contains("heart")) {
+    document.querySelector(".heart").classList.add("red");
+
+    let like = e.target.parentElement.parentElement;
+    if (fav.length) {
+      if (!fav.includes(like.dataset.id)) {
+        fav.push(like.dataset.id);
+      }
+    } else if (fav.length == 0) {
+      fav.push(like.dataset.id);
+    }
   }
 }
 
 // create a model
 function mealRecipeModal(meal) {
-  meal=meal[0];
+  meal = meal[0];
   let html = `
   <h2 class="recipe-title">${meal.strMeal}</h2> 
 
@@ -377,10 +403,9 @@ function mealRecipeModal(meal) {
             </div>
             <div class="recipe-meal-img"><img src="${meal.strMealThumb}" alt="" /></div>
             <div class="recipe-link"><a href="${meal.strYoutube}" target="_blank">watch video</a></div>`;
-            mealDetailsContent.innerHTML=html;
-            mealDetailsContent.parentElement.classList.add('showRecipe')
-
-          }
+  mealDetailsContent.innerHTML = html;
+  mealDetailsContent.parentElement.classList.add("showRecipe");
+}
 
 inputBox.onkeyup = function () {
   let result = [];
@@ -403,4 +428,38 @@ function display(result) {
 function selectInput(l) {
   inputBox.value = l.innerHTML;
   resultBox.innerHTML = "";
+}
+
+// fav list function
+const love = document.querySelector("#fav");
+const favList = document.querySelector(".favList");
+
+
+love.addEventListener("click", getFavList);
+function getFavList() {
+  container.classList.add("containerGone");
+  favList.innerHTML = "";
+
+  if (fav.length) {
+    let html = "";
+
+    fav.forEach(async (id) => {
+      await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          const m = data.meals[0];
+          html += `
+          <div class="fav-meal-item" data-id="${m.idMeal}">
+          <p><i class="fa-solid fa-heart fav-heart"></i></p>
+
+              <div class="fav-meal-img"><img src="${m.strMealThumb}" alt="img" /></div>
+              <div class="fav-meal-name">
+                <h3>${m.strMeal} </h3> 
+                <a href="#" class="fav-recipe-btn">Get Recepi</a>
+              </div>
+            </div>`;
+          favList.innerHTML = html;
+        });
+    });
+  }
 }
