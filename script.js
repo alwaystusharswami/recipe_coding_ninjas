@@ -312,9 +312,14 @@ const inputBox = document.querySelector("#search-input");
 const searchBtn = document.querySelector("#search-btn");
 const mealList = document.querySelector("#meal");
 const recipeCloseBtn = document.querySelector(".recipe-close-btn");
-
+const mealDetailsContent=document.querySelector('.meal-details-content')
 searchBtn.addEventListener("click", getMealList);
+mealList.addEventListener("click", getMealRecipe);
 
+
+recipeCloseBtn.addEventListener('click',()=>{
+  mealDetailsContent.parentElement.classList.remove('showRecipe');
+})
 // get meal list that matches with ingredients
 async function getMealList() {
   let searchInputTxt = document.querySelector("#search-input").value.trim();
@@ -323,11 +328,9 @@ async function getMealList() {
   )
     .then((res) => res.json())
     .then((data) => {
-      console.log(data.meals)
       let html = "";
       if (data.meals) {
         data.meals.forEach((meal) => {
-
           html += `
           <div class="meal-item" data-id="${meal.idMeal}">
               <div class="meal-img"><img src="${meal.strMealThumb}" alt="img" /></div>
@@ -337,97 +340,67 @@ async function getMealList() {
               </div>
             </div>`;
         });
+      } else {
+        html = "sorry , we didn't find any Meal";
+        mealList.classList.add("notFound");
       }
-  console.log(html)
 
-      mealList.innerHTML=html;
+      mealList.innerHTML = html;
     });
 }
+// getMealRecipe
+async function getMealRecipe(e) {
+  e.preventDefault();
+  if (e.target.classList.contains("recipe-btn")) {
+    let mealItem = e.target.parentElement.parentElement;
+    await fetch(
+      `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealItem.dataset.id}`
+    )
+      .then((res) => res.json())
+      .then((data) => mealRecipeModal(data.meals));
+  }
+}
 
-// inputBox.onkeyup = function () {
-//   let result = [];
-//   let input = inputBox.value;
-//   if (input.length) {
-//     result = list.filter((keyword) => {
-//       return keyword.toLowerCase().includes(input.toLowerCase());
-//     });
-//   }
-//   display(result);
-// };
+// create a model
+function mealRecipeModal(meal) {
+  meal=meal[0];
+  let html = `
+  <h2 class="recipe-title">${meal.strMeal}</h2> 
 
-// function display(result) {
-//   const content = result.map((l) => {
-//     return "<li onclick=selectInput(this)>" + l + "</li>";
-//   });
-//   resultBox.innerHTML = "<ul>" + content.join("") + "</ul>";
-// }
+            <p class="recipe-category">${meal.strCategory}  </p>
+            <p class="recipe-category"> ${meal.strArea} Dish </p>
+            <div class="recipe-instruct">
+              <h3>Instructions:</h3>
+              <p>
+                ${meal.strInstructions}
+              </p>
+            </div>
+            <div class="recipe-meal-img"><img src="${meal.strMealThumb}" alt="" /></div>
+            <div class="recipe-link"><a href="${meal.strYoutube}" target="_blank">watch video</a></div>`;
+            mealDetailsContent.innerHTML=html;
+            mealDetailsContent.parentElement.classList.add('showRecipe')
 
-// function selectInput(l) {
-//   inputBox.value = l.innerHTML;
-//   resultBox.innerHTML = "";
-// }
-// !search by name meal api function
+          }
 
-// let dataList = [];
-// const ul = document.querySelector(".meal-result");
+inputBox.onkeyup = function () {
+  let result = [];
+  let input = inputBox.value;
+  if (input.length) {
+    result = list.filter((keyword) => {
+      return keyword.toLowerCase().includes(input.toLowerCase());
+    });
+  }
+  display(result);
+};
 
-// document.querySelector("#search-btn").addEventListener("click", async function (e) {
-//   e.preventDefault();
-//   resultBox.innerHTML=' ';
-//   while (ul.hasChildNodes()) {
-//     ul.removeChild(ul.firstChild);
-//   }
-//   let values = document.querySelector("#search-input").value;
-//   if (values.length) {
-//     await fetch(
-//       `https://www.themealdb.com/api/json/v1/1/search.php?s=${values}`
-//     )
-//       .then((res) => res.json())
-//       .then((data) => {
-//         dataList = [];
+function display(result) {
+  const content = result.map((l) => {
+    return "<li onclick=selectInput(this)>" + l + "</li>";
+  });
+  resultBox.innerHTML = "<ul>" + content.join("") + "</ul>";
+}
 
-//         data.meals.forEach((element) => {
-//           dataList.push(element);
-//         });
-//       });
-//     dataList.forEach((element) => {
-//       const div = document.createElement("div");
-//       div.style.boxShadow = `1px 1px 10px black`;
-//       div.style.margin = `20px`;
-//       div.style.padding = `20px 10px`;
-//       div.style.width = "250px";
-//       div.style.borderRadius = `20px`;
-//       div.style.textAlign = "center";
-//       div.style.backgroundColor="white";
-
-//       const p = document.createElement("p");
-//       p.innerHTML = element.strMeal;
-//       // p.style.textAlign='center';
-//       p.style.fontWeight = 800;
-//       const img = document.createElement("img");
-//       img.src = element.strMealThumb;
-//       img.style.width = "250px";
-//       img.style.borderRadius = `20px`;
-
-//       const a = document.createElement("a");
-//       a.style.backgroundColor = "red";
-//       a.style.color = "white";
-//       a.style.padding = `5px 20px`;
-//       a.style.width = "50px";
-//       a.innerHTML = "Fav";
-//       a.link=element.idMeal;
-//       a.style.borderRadius = `20px`;
-
-//       div.appendChild(img);
-//       div.appendChild(p);
-//       div.appendChild(a);
-//       ul.appendChild(div);
-//       console.log(element.idMeal);
-//     });
-//   } else if (values.length == 0) {
-//     dataList = [];
-//     while (ul.hasChildNodes()) {
-//       ul.removeChild(ul.firstChild);
-//     }
-//   }
-// });
+function selectInput(l) {
+  inputBox.value = l.innerHTML;
+  resultBox.innerHTML = "";
+}
