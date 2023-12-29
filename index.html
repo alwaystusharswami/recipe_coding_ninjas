@@ -9,13 +9,16 @@
       src="https://kit.fontawesome.com/54fffd334c.js"
       crossorigin="anonymous"
     ></script>
-    <script src="script.js" defer></script>
   </head>
-  <body style="background-color: orange">
+
+  <body>
     <nav>
+      <h1 style="font-size: 2.5rem">
+        <i class="fa-solid fa-utensils"></i> Foody Zone
+      </h1>
       <ul>
-        <li id="home">Home</li>
-        <li id="fav">Fav Meal</li>
+        <li id="homepage">Home</li>
+        <li id="favpage">Fav Meal</li>
       </ul>
     </nav>
     <div class="container">
@@ -61,7 +64,21 @@
     <div class="favContainer">
       <h1>favorite Recipe</h1>
       <div class="favList"></div>
-
-  </div>
+      <div class="fav-meal-details">
+        <!-- recipe close btn   -->
+        <button
+          type="button"
+          class="btn fav-recipe-close-btn"
+          id="fav-recipe-close-btn"
+        >
+          X
+        </button>
+        <!-- meal content  -->
+        <div class="fav-meal-details-content"></div>
+      </div>
+    </div>
   </body>
+  <script src="suggestionData.js"></script>
+  <script src="script.js"></script>
+
 </html>
