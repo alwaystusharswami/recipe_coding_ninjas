@@ -2,7 +2,7 @@
 In this website you can find your meal Recipe. How to make delicious food 
 
 # Hosted Link
-[https://alwaystusharswami.github.io/recipe_coding_ninjas/](link.com)
+[foody Zone](https://alwaystusharswami.github.io/recipe_coding_ninjas/)
 
 
 # Feature 
